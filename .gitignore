@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-.venv/
 venv/
 .pytest_cache/
 .mypy_cache/
@@ -12,8 +11,7 @@ htmlcov/
 dist/
 build/
 
-# Node / frontend
-node_modules/
+# Node / frontend dependency trees are tracked on purpose.
 frontend/dist/
 frontend/coverage/
 e2e/playwright-report/
@@ -26,11 +24,13 @@ e2e/blob-report/
 .env.*
 !.env.example
 
-# App data (never commit user data)
-data/
+# Runtime database files stay local; the main SQLite file is tracked.
+data/*
+!data/fitness.db
 backups/
 *.db
 *.db-*
+!data/fitness.db
 
 # IDE / OS
 .idea/
