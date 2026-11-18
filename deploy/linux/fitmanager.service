@@ -1,0 +1,28 @@
+[Unit]
+Description=FitManager fitness training manager
+Documentation=file:///opt/fitness-manager-v1/deploy/linux/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=fitmanager
+Group=fitmanager
+WorkingDirectory=/opt/fitness-manager-v1
+Environment=PYTHONUNBUFFERED=1
+# Optional: override install root when not using /opt/fitness-manager-v1
+# Environment=FITMANAGER_ROOT=/opt/fitness-manager-v1
+ExecStart=/opt/fitness-manager-v1/scripts/linux/run-prod.sh
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=60
+TimeoutStopSec=30
+# Hardening (service only needs its own files + loopback bind)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/fitness-manager-v1/data /opt/fitness-manager-v1/backups
+
+[Install]
+WantedBy=multi-user.target
